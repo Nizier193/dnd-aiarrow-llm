@@ -303,6 +303,11 @@ def main():
         st.sidebar.header("Настройки")
         st.header("Настройки и основные сведения")
 
+        if 'image_path' in st.session_state:
+            st.markdown(f"<small>Текущая картинка: {st.session_state.image_path}</small>", unsafe_allow_html=True)
+        if 'music_path' in st.session_state:
+            st.markdown(f"<small>Текущая музыка: {st.session_state.music_path}</small>", unsafe_allow_html=True)
+
         if st.session_state.current_game:
             st.session_state.voice_name = st.selectbox("Выберите голос для озвучки", st.session_state.current_game.get_available_voices())
 
@@ -627,6 +632,7 @@ def main():
                     )
                     if image_path:
                         st.session_state.image_path = image_path
+                        
                 if st.session_state.generate_audio:
                     music_path, url = st.session_state.current_game.game_setup.generate_music_for_scene(
                         action.message
@@ -714,6 +720,8 @@ def main():
             st.session_state.current_game = None
             st.success("Игра сброшена. Готовы к новому приключению!")
             st.rerun()
+
+            # Отображение пути до текущей картинки и музыки ниже кнопки сброса
 
     elif page == "Управление моделями":
         manage_models()
