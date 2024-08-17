@@ -471,7 +471,14 @@ def main():
                     placeholder="def main():\n    # Ваш код здесь. Функция должна называться 'main'.\n    pass",
                     value=code,
                 )
-                st.markdown("<small>Напишите здесь свой Python-код.</small><br>Важно: <br><small><li>Когда вы делаете ход, вызывается функция <strong>'main' с аргументами.</strong><br><li>Когда вы проверяете код, вызывается функция <strong>'main' без аргументов.</strong></small>", unsafe_allow_html=True)
+                st.markdown(
+                    "<small>Напишите здесь свой Python-код.</small><br>"
+                    "Важно: <br>"
+                    "<small><li>Когда вы делаете ход, вызывается функция <strong>'main' с аргументами.</strong><br>"
+                    "<li>Когда вы проверяете код, вызывается функция <strong>'main' без аргументов.</strong><br>"
+                    "<li>Рекомендую перед ходом очищать форму с помощью любой кнопки, кроме 'Сделать ход', тогда проблем никогда не возникнет!</small>",
+                    unsafe_allow_html=True
+                )
                 st.markdown("### Действие")
                 action = st.text_input("Ваше действие:")
 
