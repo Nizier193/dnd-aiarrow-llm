@@ -186,7 +186,7 @@ class DND_Game():
             История игрока: {player.backstory[:100]}...
             """
 
-        context = self.game_setup.vector_store.similarity_search(player_info, k=3)
+        context = self.game_setup.vector_store.similarity_search(self.game_setup.game_uuid, player_info, k=3)
 
         last_context = self.game_setup.story_progression[-1][-3:]  # list[list[dict]] , последние события игры
         last_context = list(map(lambda x: x.get('message'), last_context))  # list[str]
@@ -228,7 +228,7 @@ class DND_Game():
             
             # Добавляем ход игрока в последний ход игры
             self.game_setup.story_progression[-1].append(result.to_dict())
-            self.game_setup.vector_store.add_texts(action)
+            self.game_setup.vector_store.add_texts(self.game_setup.game_uuid, action)
             return result
 
         else:
@@ -269,7 +269,7 @@ class DND_Game():
             result = GameResponse(role="player", message=action, uuid=player.uuid, task_status=status, name=player.name)
             # Добавляем ход игрока в последний ход игры
             self.game_setup.story_progression[-1].append(result.to_dict())
-            self.game_setup.vector_store.add_texts(action)
+            self.game_setup.vector_store.add_texts(self.game_setup.game_uuid, action)
             return result
         
     def get_available_voices(self):
@@ -379,7 +379,7 @@ class DND_Game():
             )
 
         result = GameResponse(role="DM", message=dm_response, features=feature, name="Dungeon Master")
-        self.game_setup.vector_store.add_texts(dm_response)
+        self.game_setup.vector_store.add_texts(self.game_setup.game_uuid, dm_response)
         self.game_setup.story_progression.append([result.to_dict()])
         self.print_dm_response(dm_response)
 

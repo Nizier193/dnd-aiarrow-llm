@@ -54,7 +54,7 @@ class Story:
         last_context = game_setup.story_progression[-1][-5:]
         last_context = list(map(lambda x: x.get('message'), last_context))
 
-        context = vector_store.similarity_search(" ".join(last_context), k=3)
+        context = vector_store.similarity_search(game_setup.game_uuid, " ".join(last_context), k=3)
 
         # Код для настройки квестов
         if SHORT_PROMPTS:
@@ -89,7 +89,7 @@ class Story:
         last_context = game_setup.story_progression[-1][-5:]
         last_context = list(map(lambda x: x.get('message'), last_context))
 
-        context = vector_store.similarity_search(" ".join(last_context), k=3)
+        context = vector_store.similarity_search(game_setup.game_uuid, " ".join(last_context), k=3)
 
         if SHORT_PROMPTS:
             dm_prompt = (f"Как Мастер Подземелий, создайте сцену для D&D:\n"
@@ -152,7 +152,7 @@ class BossFight:
         last_context = game_setup.story_progression[-1][-5:]
         last_context = list(map(lambda x: x.get('message'), last_context))
 
-        context = vector_store.similarity_search(" ".join(last_context), k=3)
+        context = vector_store.similarity_search(game_setup.game_uuid, " ".join(last_context), k=3)
 
         if SHORT_PROMPTS:
             dm_prompt = (
@@ -184,7 +184,7 @@ class BossFight:
         last_context = game_setup.story_progression[-1][-5:]
         last_context = list(map(lambda x: x.get('message'), last_context))
 
-        context = vector_store.similarity_search(" ".join(last_context), k=3)
+        context = vector_store.similarity_search(game_setup.game_uuid, " ".join(last_context), k=3)
         if SHORT_PROMPTS:
             dm_prompt = (
                 f"Как Мастер Подземелий, продолжите сцену битвы с боссом в D&D. "

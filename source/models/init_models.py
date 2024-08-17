@@ -19,8 +19,8 @@ from source.models.imgen.yandex_imgen import YandexImgen
 from source.models.soundgen.openai_TTS import OpenAI_TTS
 from source.models.soundgen.elevenlabs_TTS import ElevenLabsTTS
 
-from source.models.rag.openai_embed import initialize_rag_openai
-from source.models.rag.ollama_embed import initialize_rag_ollama
+from source.models.rag.openai_embed import RAG_OpenAI
+from source.models.rag.ollama_embed import RAG_Ollama
 
 # Set to None to use model's max_tokens
 # You can set it to any value to override model's max_tokens
@@ -44,9 +44,9 @@ def setup():
     # Инициализация RAG на основе ChromaDB
     match os.getenv('RAG_PROVIDER'):
         case "openai":
-            rag = initialize_rag_openai()
+            rag = RAG_OpenAI()
         case "ollama":
-            rag = initialize_rag_ollama()
+            rag = RAG_Ollama()
         case _:
             raise Exception("No available RAG.")
 

@@ -107,10 +107,11 @@ class Character:
         logger.info("Checking if character is AI")  # Логирование
         return self.player_type == "ai"
 
-# Основной класс для настрой�� игры D&D
+# Основной класс для настройки игры D&D
 class DND_GameSetup():
     def __init__(self):
         logger.info("Initializing DND_GameSetup")  # Логирование
+        self.game_uuid = str(uuid.uuid4())
         self.party = []
         self.current_image_url = None
         self.current_music_url = None

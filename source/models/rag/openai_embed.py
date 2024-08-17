@@ -12,7 +12,16 @@ load_dotenv(root_directory + '/.env')
 
 proxy_url = "http://CKhCxU:v0bAeV@45.145.15.77:8000"
 
-def initialize_rag_openai():
+class RAG_OpenAI():
+    def similarity_search(self, game_uuid: str, query: str, k: int = 3):
+        rag = initialize_rag_openai(game_uuid)
+        return rag.similarity_search(query, k)
+    
+    def add_texts(self, game_uuid: str, text: str):
+        rag = initialize_rag_openai(game_uuid)
+        return rag.add_texts(text)
+    
+def initialize_rag_openai(game_uuid: str):
     chromadb_folder = os.path.join(root_directory, 'chromadb')
     
     embedding_model = OpenAIEmbeddings(
@@ -24,5 +33,6 @@ def initialize_rag_openai():
         embedding_function=embedding_model,
         persist_directory=chromadb_folder,
         collection_metadata={"hnsw:space": "cosine"},
-        collection_name="openai_embeddings"
+        collection_name=game_uuid
     )
+
