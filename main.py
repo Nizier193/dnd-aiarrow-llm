@@ -77,7 +77,7 @@ def manage_models():
 
     # Define the model data
     model_data = {
-        'LLM': {'yandex': 'GPT-3', 'openai': 'GPT-4o'},
+        'LLM': {'yandex': 'Yandex GPT-3', 'openai': 'OpenAI GPT-4o'},
         'Image': {'openai': 'DALL-E-3', 'yandex': 'YandexArt'},
         'Music': {'suno': 'Suno MusicGen'},
         'RAG': {'openai': 'OpenAI Embeddings', 'ollama': 'Ollama Embeddings'},
