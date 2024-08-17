@@ -4,7 +4,9 @@ import sys
 from openai import OpenAI
 import time
 
-from langchain.chat_models import ChatOpenAI
+import httpx
+
+from langchain_openai import ChatOpenAI
 
 root_directory = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 sys.path.insert(0, root_directory)
@@ -12,13 +14,17 @@ sys.path.insert(0, root_directory)
 from dotenv import load_dotenv
 load_dotenv(root_directory + '/.env')
 
+proxy_url = "http://CKhCxU:v0bAeV@45.145.15.77:8000"
 
 class OpenAI_LLM():
     test = os.getenv('TEST')
     def __init__(self, max_tokens: int = None):
         self.max_tokens = max_tokens
 
-        self.client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
+        self.client = OpenAI(
+            api_key=os.getenv('OPENAI_API_KEY'),
+            http_client=httpx.Client(proxies={"https://": proxy_url})
+        )
 
     def api_call(self,
                  prompt: str,
@@ -37,7 +43,8 @@ class OpenAI_LLM():
             result = ChatOpenAI(
                 openai_api_key=os.getenv('OPENAI_API_KEY'), 
                 model_name="gpt-4o",
-                max_tokens=self.max_tokens if self.max_tokens else max_tokens
+                max_tokens=self.max_tokens if self.max_tokens else max_tokens,
+                http_client=httpx.Client(proxies={"https://": proxy_url})
             ).invoke(prompt, max_tokens=self.max_tokens if self.max_tokens else max_tokens)
 
             return result.content
@@ -49,7 +56,8 @@ class OpenAI_LLM():
         print("Initializing Chat Model - Model: gpt-4o")
         return ChatOpenAI(
             openai_api_key=os.getenv('OPENAI_API_KEY'), 
-            model_name="gpt-4o"
+            model_name="gpt-4o",
+            http_client=httpx.Client(proxies={"https://": proxy_url})
         )
 
     def check_openai_availability(self):

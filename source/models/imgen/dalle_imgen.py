@@ -4,17 +4,25 @@ import sys
 import requests
 from openai import OpenAI
 
+import httpx
+
 root_directory = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 sys.path.insert(0, root_directory)
 
 from dotenv import load_dotenv
 load_dotenv(root_directory + '/.env')
 
+
+proxy_url = "http://CKhCxU:v0bAeV@45.145.15.77:8000"
+
 class DalleImgen():
     test = os.getenv('TEST')
 
     def __init__(self):
-        self.client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
+        self.client = OpenAI(
+            api_key=os.getenv('OPENAI_API_KEY'),
+            http_client=httpx.Client(proxies={"https://": proxy_url})
+        )
 
     def save_to_file(self, url, filepath):
         print(f"[INFO] Saving file from URL: {url} to {filepath}")  # Логирование

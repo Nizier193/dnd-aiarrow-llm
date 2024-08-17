@@ -9,6 +9,9 @@ sys.path.insert(0, root_directory)
 from dotenv import load_dotenv
 load_dotenv(root_directory + '/.env')
 
+import httpx
+proxy_url = "http://CKhCxU:v0bAeV@45.145.15.77:8000"
+
 class Voices:
     alloy = "alloy"
     echo = "echo"
@@ -21,7 +24,8 @@ class OpenAI_TTS():
     test = os.getenv('TEST')
     def __init__(self):
         self.client = OpenAI(
-            api_key=os.getenv('OPENAI_API_KEY')
+            api_key=os.getenv('OPENAI_API_KEY'),
+            http_client=httpx.Client(proxies={"https://": proxy_url})
         )
 
     def get_available_voices(self):
