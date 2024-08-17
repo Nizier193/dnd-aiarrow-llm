@@ -177,7 +177,7 @@ class BossFight:
             f"Описание должно включать в себя описание сцены, где происходит битва."
         )
 
-        return LLM.api_call(dm_prompt, 500), dm_prompt
+        return LLM.api_call(dm_prompt, 5000), dm_prompt
     
     def next_step_description(self, vector_store, game_setup, quest_ended: str):
         logging.info("game_quest - next_step_description - Начало следующего шага битвы с боссом")

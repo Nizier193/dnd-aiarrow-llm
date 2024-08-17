@@ -378,7 +378,7 @@ class DND_GameSetup():
             """
 
         print(setup_models)
-        backstory = LLM.api_call(generate_character_prompt, 300) if generate_auto else player_data.get("backstory")
+        backstory = LLM.api_call(generate_character_prompt, 3000) if generate_auto else player_data.get("backstory")
 
         console.print(Panel(
             Text(backstory, style="italic"),

@@ -207,7 +207,7 @@ class DND_Game():
                     damage, hp = self.current_quest.attack(is_ai=True)
                     player_AI_prompt += f"\n* Ваш персонаж атакует босса, нанося {damage} урона. HP босса: {hp}."
 
-            action = LLM.api_call(player_AI_prompt, 500)
+            action = LLM.api_call(player_AI_prompt, 3000)
             if len(action) == 0: action = "Ничего не делает."
             self.print_player_turn(
                 player,
