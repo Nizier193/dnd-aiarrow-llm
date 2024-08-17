@@ -1,4 +1,4 @@
-![Логотип](readme_source/main_logo.png)
+![Логотип](readme_source/main_logo.jpg)
 
 # Code Dungeons
 
