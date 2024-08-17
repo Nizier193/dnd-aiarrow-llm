@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информация о текущей игре</title>
+</head>
+<body>
+    <h1>Информация о текущей игре</h1>
+    {% if game_info %}
+        <p>UUID администратора: {{ game_info.admin_uuid }}</p>
+        <p>Максимальное количество AI: {{ game_info.max_n_ai }}</p>
+        <p>Максимальное количество игроков: {{ game_info.max_n_players }}</p>
+        <p>Текущее количество AI: {{ game_info.current_n_ai }}</p>
+        <p>Текущее количество игроков: {{ game_info.current_n_players }}</p>
+        <h2>Игроки:</h2>
+        <ul>
+            {% for player in game_info.players %}
+                <li>{{ player.name }} ({{ player.character_class }}, {{ player.race }})</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Игра еще не создана.</p>
+    {% endif %}
+
+    <h1>Задачи:</h1>
+    <ul>
+        {% for task in tasks %}
+            <h3>Задача: {{ task.task_name }}</h3>
+            <p>Сложность: {{ task.task_difficulty }}</p>
+            <p>Описание: {{ task.task_description }}</p>
+            <p>Тестовые данные: {{ task.task_check_data }}</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>
