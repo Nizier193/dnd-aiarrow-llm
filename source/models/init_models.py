@@ -24,7 +24,7 @@ from source.models.rag.ollama_embed import RAG_Ollama
 
 # Set to None to use model's max_tokens
 # You can set it to any value to override model's max_tokens
-MAX_TOKENS = 5000
+MAX_TOKENS = 2500
 # Initializing models
 def setup():
     # Модели используют метод api_call, который возвращает text
