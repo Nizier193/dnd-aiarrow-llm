@@ -25,6 +25,7 @@ from source.shell.game_task_generator.game_task_generator import GameTask
 
 load_dotenv('.env')
 
+admin_uuid = ['dcdc4443-4047-48fd-a909-0105dfb16c8d']
 tasker = GameTask()
 
 st.set_page_config(page_title="CodeDungeons", page_icon="⚔️", layout="wide")
@@ -112,7 +113,8 @@ def manage_models():
                                     [f"{k}: {v}" for k, v in model_data['TTS'].items()],
                                     format_func=lambda x: x.split(': ')[1])
 
-        submit_button = st.form_submit_button("Apply Model Selection", disabled=not(CAN_CHANGE_MODELS))
+        admin_uuid_key = st.text_input("Admin UUID Key", value="")
+        submit_button = st.form_submit_button("Apply Model Selection")
         st.markdown("""
         <div style="
             background-color: rgba(70, 70, 70, 0.8);
@@ -137,33 +139,36 @@ def manage_models():
             font-size: 16px;
             margin-bottom: 20px;  /* Added margin for spacing */
         ">
-            <p>Было решено отключить возможность изменения моделей в связи с боевым режимом работы.</p>
-            <p>Для изменения моделей необходимо развернуть приложение локально и изменить флаг <strong>CAN_CHANGE_MODELS</strong> в самом начале кода. 
+            <p>Было решено отключить возможность изменения моделей без ключа админа.</p>
+            <p>Для изменения моделей необходимо развернуть приложение локально и изменить флаг <strong>CAN_CHANGE_MODELS</strong> на True в самом начале кода. 
             Код рабочий и был протестирован много раз. Пробный вызов модели можно осуществить в Настройках.</p>
             <p>Спасибо за понимание!</p>
         </div>
         """, unsafe_allow_html=True)
 
     if submit_button:
-        llm_provider, model = selected_llm.split(': ')
-        os.environ['LLM_PROVIDER'] = llm_provider
+        if (admin_uuid_key in admin_uuid) or CAN_CHANGE_MODELS:
+            llm_provider, model = selected_llm.split(': ')
+            os.environ['LLM_PROVIDER'] = llm_provider
         
-        imgen_provider, model = selected_image.split(': ')
-        os.environ['IMGEN_PROVIDER'] = imgen_provider
+            imgen_provider, model = selected_image.split(': ')
+            os.environ['IMGEN_PROVIDER'] = imgen_provider
 
-        music_provider, model = selected_music.split(': ')
-        os.environ['MUSIC_PROVIDER'] = music_provider
+            music_provider, model = selected_music.split(': ')
+            os.environ['MUSIC_PROVIDER'] = music_provider
 
-        rag_provider, model = selected_rag.split(': ')
-        os.environ['RAG_PROVIDER'] = rag_provider
+            rag_provider, model = selected_rag.split(': ')
+            os.environ['RAG_PROVIDER'] = rag_provider
 
-        tts_provider, model = selected_tts.split(': ')
-        os.environ['TTS_PROVIDER'] = tts_provider
+            tts_provider, model = selected_tts.split(': ')
+            os.environ['TTS_PROVIDER'] = tts_provider
 
-        reload_models()
-        # Here you can add logic to apply the selected models
-        st.success("Model selection applied successfully!")
-    
+            reload_models()
+            # Here you can add logic to apply the selected models
+            st.success("Model selection applied successfully!")
+
+        else:
+            st.info("Неверный ключ администратора для изменения моделей.")
 
 def players_turn():
     ai_players = [player for player in st.session_state.current_game.game_setup.party if player.player_type == "ai"]
