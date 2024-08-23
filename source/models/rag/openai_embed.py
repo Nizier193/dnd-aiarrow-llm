@@ -10,7 +10,7 @@ sys.path.insert(0, root_directory)
 from dotenv import load_dotenv
 load_dotenv(root_directory + '/.env')
 
-proxy_url = "http://CKhCxU:v0bAeV@45.145.15.77:8000"
+proxy_url = os.getenv('OPENAI_PROXY')
 
 class RAG_OpenAI():
     def similarity_search(self, game_uuid: str, query: str, k: int = 3):

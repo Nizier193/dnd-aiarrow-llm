@@ -14,7 +14,7 @@ sys.path.insert(0, root_directory)
 from dotenv import load_dotenv
 load_dotenv(root_directory + '/.env')
 
-proxy_url = "http://CKhCxU:v0bAeV@45.145.15.77:8000"
+proxy_url = os.getenv('OPENAI_PROXY')
 
 class OpenAI_LLM():
     test = os.getenv('TEST')
@@ -42,7 +42,7 @@ class OpenAI_LLM():
         try:
             result = ChatOpenAI(
                 openai_api_key=os.getenv('OPENAI_API_KEY'), 
-                model_name="gpt-4o",
+                model_name=os.getenv('MODEL_NAME'),
                 max_tokens=self.max_tokens if self.max_tokens else max_tokens,
                 http_client=httpx.Client(proxies={"https://": proxy_url})
             ).invoke(prompt, max_tokens=self.max_tokens if self.max_tokens else max_tokens)
@@ -53,15 +53,15 @@ class OpenAI_LLM():
             return "Unable to generate content. Please check OpenAI API status."
 
     def init_chat_model(self):
-        print("Initializing Chat Model - Model: gpt-4o")
+        print(f"Initializing Chat Model - Model: {os.getenv('MODEL_NAME')}")
         return ChatOpenAI(
             openai_api_key=os.getenv('OPENAI_API_KEY'), 
-            model_name="gpt-4o",
+            model_name=os.getenv('MODEL_NAME'),
             http_client=httpx.Client(proxies={"https://": proxy_url})
         )
 
     def check_openai_availability(self):
-        print("Checking OpenAI Availability - Model: gpt-4o")
+        print(f"Checking OpenAI Availability - Model: {os.getenv('MODEL_NAME')}")
         if self.test == "True":
             return True
 

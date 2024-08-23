@@ -189,6 +189,9 @@ def players_turn():
                 text=action.message,
                 voice_name=st.session_state.voice_name
             )
+            print(
+                f"Player {player.name} made action: {filepath}"
+            )
 
 def set_background_image(image_source):
     """

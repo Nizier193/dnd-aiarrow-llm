@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv(root_directory + '/.env')
 
 import httpx
-proxy_url = "http://CKhCxU:v0bAeV@45.145.15.77:8000"
+proxy_url = os.getenv('OPENAI_PROXY')
 
 class Voices:
     alloy = "alloy"
