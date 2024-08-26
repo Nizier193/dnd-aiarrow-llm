@@ -1,6 +1,6 @@
 ![Логотип](readme_source/main_logo.jpg)
 
-![Промо-видео Code Dungeons](readme_source/videos/CodeDungeons_promo.mp4)
+<video src='readme_source/videos/CodeDungeons_promo.mp4' width=180/>
 
 Демонстрация работы
 
