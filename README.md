@@ -1,8 +1,7 @@
 ![Логотип](readme_source/main_logo.jpg)
 
-<video src='readme_source/videos/CodeDungeons_promo.mp4' width=180/>
-
-Демонстрация работы
+[<img src="https://www.zastavki.com/pictures/originals/2014/Backgrounds_Black_wallpaper_with_space_scenery_078601_.jpg" width="800"
+/>](https://youtu.be/8R33bQTtfJY)
 
 # Оглавление
 
