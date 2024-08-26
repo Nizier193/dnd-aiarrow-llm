@@ -1,7 +1,9 @@
 ![Логотип](readme_source/main_logo.jpg)
 
-[<img src="https://www.zastavki.com/pictures/originals/2014/Backgrounds_Black_wallpaper_with_space_scenery_078601_.jpg" width="800"
+[<img src="readme_source/interface.jpg" width="500"
 />](https://youtu.be/8R33bQTtfJY)
+
+![**📲 Клик**](https://youtu.be/8R33bQTtfJY) для видео демонстрации проекта.
 
 # Оглавление
 
